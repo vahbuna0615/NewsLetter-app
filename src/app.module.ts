@@ -18,23 +18,26 @@ import { User } from './users/entities/user.entity';
 import { EmailModule } from './email/email.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TasksModule } from './tasks/task.module';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 @Global()
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'Anubhav@6263626091',
-      database: 'NewsLetter',
+      // host: 'localhost',
+      // port: 5432,
+      // username: 'postgres',
+      // password: 'Anubhav@6263626091',
+      // database: 'NewsLetter',
+      url: process.env.DB_URL,
       entities: [Campaign, ClickStat, List, Organization, Subscriber, User],
       synchronize: true,
     }),
     OrganizationsModule,
     UserModule,
     SubscribersModule,
-
     ListsModule,
     CampaignsModule,
     ClickStatsModule,

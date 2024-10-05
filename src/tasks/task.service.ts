@@ -9,9 +9,9 @@ export class TasksService {
     ) { }
     private readonly logger = new Logger(TasksService.name);
 
-    @Cron('0 1-6 * * *')
+    @Cron('0 * * * *')
     async handleCron() {
-        this.logger.debug('Called every day');
+        this.logger.debug('Called every hour at zeroth minute');
     }
 
 }

@@ -1,11 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
+import * as sgMail from '@sendgrid/mail';
 
 @Injectable()
 export class EmailService {
-    constructor(private readonly mailerService: MailerService) { }
+    constructor(private readonly mailerService: MailerService) { 
+        const key = process.env.SENDGRID_API_KEY
+        sgMail.setApiKey(key)
+    }
 
     async sendEmail(to: string, subject: string, text: string) {
+        const { SENDER_EMAIL, SENDER_NICKNAME } = process.env
         const emailTemplate = `
         <!DOCTYPE html>
         <html lang="en">
@@ -56,11 +61,26 @@ export class EmailService {
         </body>
         </html>
         `;
-        await this.mailerService.sendMail({
+
+        const msg = {
             to,
+            from: {
+                name: SENDER_NICKNAME,
+				email: SENDER_EMAIL
+            },
             subject,
-            html: emailTemplate,
-        });
+            text,
+            html: emailTemplate
+        }
+
+        try {
+            await sgMail.send(msg)
+        } catch (err) {
+            return {
+                message: "Something went wrong",
+				error: err.message
+            }
+        }
     }
 
 }

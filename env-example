@@ -1,0 +1,3 @@
+DB_URL=[postgres db url]
+RSS_FEED_URL=[rss feed json url]
+SENDGRID_API_KEY=[sendgrid api key]
