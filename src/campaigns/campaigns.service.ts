@@ -39,6 +39,15 @@ export class CampaignService {
     return this.campaignRepository.save(campaign);
   }
 
+  async findLastAddedCampaign(): Promise<Campaign | null> {
+    const campaign = await this.campaignRepository.find({
+      order: { createdAt: 'DESC' },
+      take: 1
+    })
+
+    return campaign[0] || null
+  }
+
   async listCampaigns(): Promise<Campaign[]> {
     return this.campaignRepository.find();
   }

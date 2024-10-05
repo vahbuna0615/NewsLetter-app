@@ -9,8 +9,8 @@ export class EmailService {
         sgMail.setApiKey(key)
     }
 
-    async sendEmail(to: string, subject: string, text: string) {
-        const { SENDER_EMAIL, SENDER_NICKNAME } = process.env
+    async sendEmail(to: string[], subject: string, text: string, item?: any) {
+        const { SENDER_EMAIL: senderEmail, SENDER_NICKNAME: senderNickname } = process.env
         const emailTemplate = `
         <!DOCTYPE html>
         <html lang="en">
@@ -51,7 +51,8 @@ export class EmailService {
                     New Info From NewsLetter !!!
                 </div>
                 <div class="content">
-                    <strong>${text}</strong>
+                    <strong>${subject}</strong>
+                    ${item}
                 </div>
                 <div class="footer">
                     Thank you,<br>
@@ -65,8 +66,8 @@ export class EmailService {
         const msg = {
             to,
             from: {
-                name: SENDER_NICKNAME,
-				email: SENDER_EMAIL
+                name: senderNickname,
+				email: senderEmail
             },
             subject,
             text,

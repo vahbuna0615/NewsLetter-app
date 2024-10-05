@@ -14,5 +14,6 @@ import { AuthModule } from 'src/auth/auth.module';
   ],
   controllers: [CampaignController],
   providers: [CampaignService],
+  exports: [CampaignService]
 })
 export class CampaignsModule { }

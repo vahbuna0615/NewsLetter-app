@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateSubscriberDto } from './dto/create-subscriber.dto';
@@ -36,6 +36,18 @@ export class SubscriberService {
       take: limit,
       relations: ['organization']
     });
+  }
+
+  async findAllSubscriberEmails() {
+    const subscribers = await this.subscriberRepository.find()
+    if (!subscribers) {
+      throw new NotFoundException('No subscriber found')
+    }
+    const subscriberEmailIds = subscribers.map((sub) => {
+      return sub.email
+    })
+
+    return subscriberEmailIds;
   }
 
   async update(id: string, updateSubscriberDto: UpdateSubscriberDto) {

@@ -10,7 +10,7 @@ export class ClickStat {
     @ManyToOne(() => Campaign, campaign => campaign.clickStats, { onDelete: 'CASCADE' })
     campaign: Campaign;
 
-    @Column({ length: 255 })
+    @Column()
     link: string;
 
     @Column({ default: 0 })
