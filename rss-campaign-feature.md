@@ -3,7 +3,7 @@
 
 ## Workflow
 
-<img src="util/flow.png" alt="flow" width="400"/>
+<img src="util/flow.jpg" alt="flow" width="400"/>
 
 - Created an organization (by temporarily disabling auth guard)
 - Registered a new user using the created org's id and with 'admin' role
