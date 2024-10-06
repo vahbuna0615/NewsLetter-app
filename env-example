@@ -1,3 +1,6 @@
 DB_URL=[postgres db url]
 RSS_FEED_URL=[rss feed json url]
 SENDGRID_API_KEY=[sendgrid api key]
+SENDER_NICKNAME=[sender's nickname]
+SENDER_EMAIL=[sender's email address]
+FEED_ITEM_LIMIT=[limit for retrieving rss feed items]
