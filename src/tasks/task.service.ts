@@ -17,7 +17,7 @@ export class TasksService {
     ) { }
     private readonly logger = new Logger(TasksService.name);
 
-    @Cron('0 0 * * *')
+    @Cron('0 2 * * *')
     async handleCron() {
         const { RSS_FEED_URL : rssFeedUrl, FEED_ITEM_LIMIT : itemLimit} = process.env
         
@@ -60,7 +60,7 @@ export class TasksService {
             })
 
             // Converts the array into a single string
-            const feedItems = allPosts.join(',')
+            const feedItems = allPosts.join()
 
             // An email with the latest feed items is sent to all subscribers
             await this.mailService.sendEmail(subscribers, newCampaign.subject, newCampaign.content, feedItems)
