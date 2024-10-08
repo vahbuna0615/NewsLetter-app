@@ -16,6 +16,6 @@ export class ClickStat {
     @Column({ default: 0 })
     clickCount: number;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: 'timestamptz' })
     createdAt: Date;
 }

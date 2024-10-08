@@ -25,9 +25,9 @@ export class Organization {
     @OneToMany(() => Campaign, campaign => campaign.organization)
     campaigns: Campaign[];
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: 'timestamptz' })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ type: 'timestamptz' })
     updatedAt: Date;
 }

@@ -31,10 +31,10 @@ export class TasksService {
         // Retrieves an array of all subscriber email Ids
         const subscribers = await this.subscriberService.findAllSubscriberEmails();
 
-        const lastAddedFeedItemDate = new Date(items[0].date_published)
-        let lastAddedCampaignDate: Date;
+        const lastAddedFeedItemDate = new Date(items[0].date_published).getTime()
+        let lastAddedCampaignDate: any;
         if (lastAddedCampaign){
-            lastAddedCampaignDate = new Date(lastAddedCampaign.createdAt)
+            lastAddedCampaignDate = new Date(lastAddedCampaign.createdAt).getTime()
         }
 
         // Takes the specified number of latest feed items
@@ -53,20 +53,22 @@ export class TasksService {
                 this.clickStatService.create({ campaignId: newCampaign.id, link: item.url })
                 return (
                     `<div class="container">
-                        <h2>${item.title}</h2>
+                        <a href=${item.url}>
+                            <h2>${item.title}</h2>
+                        </a>
                         <p>${item.content_html}</p>
                     </div>`
                 )
             })
 
             // Converts the array into a single string
-            const feedItems = allPosts.join()
+            const feedItems = allPosts.join('')
 
             // An email with the latest feed items is sent to all subscribers
             await this.mailService.sendEmail(subscribers, newCampaign.subject, newCampaign.content, feedItems)
         }
 
-        this.logger.debug('Called every day at midnight');
+        this.logger.debug('Called every two hours');
     }
 
 }

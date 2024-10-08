@@ -24,6 +24,6 @@ export class Campaign {
     @OneToMany(() => ClickStat, clickStat => clickStat.campaign)
     clickStats: ClickStat[];
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: 'timestamptz' })
     createdAt: Date;
 }

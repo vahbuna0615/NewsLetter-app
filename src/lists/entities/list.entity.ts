@@ -19,6 +19,6 @@ export class List {
     @OneToMany(() => Campaign, campaign => campaign.list)
     campaigns: Campaign[];
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: 'timestamptz' })
     createdAt: Date;
 }

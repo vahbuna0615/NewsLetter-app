@@ -15,6 +15,6 @@ export class Subscriber {
     @Column('jsonb', { nullable: true })
     customFields: object;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: 'timestamptz' })
     createdAt: Date;
 }
